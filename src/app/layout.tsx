@@ -1,6 +1,8 @@
+import { Button } from '@/components/ui/button'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { CalendarIcon, InboxIcon, MenuIcon, PlusIcon } from 'lucide-react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +18,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
+        <header className="px-4 py-2 border-b flex justify-between">
+          <div className="flex items-center space-x-2">
+            <Button size="icon" variant="ghost">
+              <MenuIcon />
+            </Button>
+            <h1 className="text-xl font-semibold">To Do</h1>
+          </div>
+
+          <Button size="icon" variant="ghost">
+            <PlusIcon />
+          </Button>
+        </header>
+        <div className="flex flex-1">
+          <div className="w-80 border-r flex flex-col p-2">
+            <Button variant="ghost" className="flex justify-start">
+              <InboxIcon className="mr-2" />
+              Index  
+            </Button>
+            <Button variant="ghost" className="flex justify-start">
+              <CalendarIcon className="mr-2" />
+              Today
+            </Button>
+          </div>
+          {children}
+        </div>
+      </body>
     </html>
   )
 }
