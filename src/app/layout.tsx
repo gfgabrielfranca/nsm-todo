@@ -2,7 +2,8 @@ import { Button } from '@/components/ui/button'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { CalendarIcon, InboxIcon, MenuIcon, PlusIcon } from 'lucide-react'
+import { CalendarIcon, FolderIcon, InboxIcon, MenuIcon, PlusIcon } from 'lucide-react'
+import { MenuButton } from '@/components/MenuButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,14 +34,28 @@ export default function RootLayout({
         </header>
         <div className="flex flex-1">
           <div className="w-80 border-r flex flex-col p-2">
-            <Button variant="ghost" className="flex justify-start">
-              <InboxIcon className="mr-2" />
-              Index  
-            </Button>
-            <Button variant="ghost" className="flex justify-start">
-              <CalendarIcon className="mr-2" />
+            <MenuButton.Root icon={InboxIcon} href="#">
+              Index 
+            </MenuButton.Root>
+            <MenuButton.Root icon={CalendarIcon} href="#">
               Today
-            </Button>
+            </MenuButton.Root>
+            <div className='flex justify-between px-4 py-2 text-muted-foreground'>
+              <p className='text-sm font-medium'>Projects</p>
+              <PlusIcon className="h-5 w-5" />
+            </div>
+            <MenuButton.Root icon={FolderIcon} href="#">
+              Project One
+              <MenuButton.MoreButton />
+            </MenuButton.Root>
+            <MenuButton.Root icon={FolderIcon} href="#">
+              Project Two
+              <MenuButton.MoreButton />
+            </MenuButton.Root>
+            <MenuButton.Root icon={FolderIcon} href="#">
+              Project Three
+              <MenuButton.MoreButton />
+            </MenuButton.Root>
           </div>
           {children}
         </div>
