@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { CalendarIcon, FolderIcon, InboxIcon, MenuIcon, PlusIcon } from 'lucide-react'
 import { MenuButton } from '@/components/MenuButton'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,9 +30,18 @@ export default function RootLayout({
             <h1 className="text-xl font-semibold">To Do</h1>
           </div>
 
-          <Button size="icon" variant="ghost">
-            <PlusIcon />
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <PlusIcon />
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
         </header>
         <div className="flex flex-1">
           <div className="w-80 border-r flex flex-col p-2">
@@ -42,7 +53,24 @@ export default function RootLayout({
             </MenuButton.Root>
             <div className='flex justify-between px-4 py-2 text-muted-foreground'>
               <p className='text-sm font-medium'>Projects</p>
-              <PlusIcon className="h-5 w-5" />
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button>
+                    <PlusIcon className="h-5 w-5" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>New Project</DialogTitle>
+                  </DialogHeader>
+                  <div>
+                    <Input />
+                  </div>
+                  <DialogFooter>
+                    <Button>Create</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
             <MenuButton.Root icon={FolderIcon} href="#">
               Project One
